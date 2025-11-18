@@ -59,7 +59,7 @@ freshersworld/
 # 🛠 Installation
 
 1. Clone the repository
-git clone https://github.com/<your-username>/freshersworld-scraper.git
+git clone https://github.com/AryanPrajapati9456/freshersworld-scraper.git
 cd freshersworld-scraper
 
 2. Install dependencies
