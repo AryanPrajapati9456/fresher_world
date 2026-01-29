@@ -9,7 +9,7 @@ import csv
 import json
 
 logging.basicConfig(
-    filename='fresher_world/fresherworld_scraper.log',
+    filename='fresherworld_scraper.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
@@ -82,7 +82,7 @@ def parse_jobs(html):
     return jobs_list
 
 
-def scrape_jobs():
+def scrape_jobs(max_pages=TOTAL_PAGES, progress_callback=None):
     logging.info("🟢 Scraper started")
     print("Scraper started 🟢")
 
@@ -92,14 +92,20 @@ def scrape_jobs():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116 Safari/537.36"
     })
 
-    for page in range(TOTAL_PAGES):
+    # Ensure max_pages doesn't exceed TOTAL_PAGES if strict, but let's allow flexibility
+    limit_pages = min(max_pages, TOTAL_PAGES)
+
+    for page in range(limit_pages):
+        if progress_callback:
+            progress_callback(page + 1, limit_pages)
+
         if page == 0:
             url = BASE_URL
         else:
             url = f"{BASE_URL}?&limit={LIMIT}&offset={LIMIT * page}"
 
-        logging.info(f"Scraping page {page + 1}: {url}")
-        print(f"➡ Scraping page {page + 1}...")
+        logging.info(f"Scraping page {page + 1} of {limit_pages}: {url}")
+        print(f"➡ Scraping page {page + 1}/{limit_pages}...")
 
         html = fetch_page(session, url)
         page_jobs = parse_jobs(html)
@@ -114,7 +120,7 @@ def scrape_jobs():
 
 def save_csv(data):
     try:
-        file_name = f"fresher_world/fresher_world_{datetime.now().strftime('%Y-%m-%d')}.csv"
+        file_name = f"fresher_world_{datetime.now().strftime('%Y-%m-%d')}.csv"
         with open(file_name, "w", encoding="utf-8", newline="") as file:
             writer = csv.DictWriter(file, fieldnames=data[0].keys())
             writer.writeheader()
@@ -126,7 +132,7 @@ def save_csv(data):
 
 def save_json(data):
     try:
-        file_name = f"fresher_world/fresher_world_{datetime.now().strftime('%Y-%m-%d')}.json"
+        file_name = f"fresher_world_{datetime.now().strftime('%Y-%m-%d')}.json"
         with open(file_name, "w", encoding="utf-8") as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
         logging.info(f"JSON saved: {file_name}")
@@ -136,7 +142,7 @@ def save_json(data):
 
 def save_excel(data):
     if data:
-        filename = f"fresher_world/fresher_world_{datetime.now().strftime('%Y-%m-%d')}.xlsx"
+        filename = f"fresher_world_{datetime.now().strftime('%Y-%m-%d')}.xlsx"
         df = pd.DataFrame(data)
         df.to_excel(filename, index=False)
         logging.info(f"Excel saved: {filename}")

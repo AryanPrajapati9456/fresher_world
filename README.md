@@ -1,153 +1,94 @@
-## 🌐 FreshersWorld Python Jobs Scraper
+# 🐍 FreshersWorld Python Jobs Analytics & Scraper
 
-A production-grade web scraper that extracts Python job listings from FreshersWorld using Requests, BeautifulSoup, sessions, retry logic, logging, random delays, and exports data into Excel, CSV, and JSON.
+![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas)
+![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
-This project is written with real freelancer standards — the type of scraper clients actually pay for.
+A production-grade web scraper and analytics tool that extracts Python job listings from **FreshersWorld**. 
+Built with **Requests**, **BeautifulSoup**, and **Streamlit**, it mimics human behavior to safely scrape over 200+ pages of job content.
 
-# 🚀 Features
+---
 
-🔹 Professional Scraping
+## 🎥 Project Demo
 
-Scrapes 200+ pages safely
+<!-- 
+    TODO: Upload your demo video or GIF here. 
+    Example: ![Demo](demo.gif) or [Watch Video](link_to_youtube)
+-->
+![Project Demo Placeholder](https://via.placeholder.com/800x400?text=Project+Demo+Video+Coming+Soon)
 
-Uses requests.Session() for efficiency
+---
 
-Smart retry logic (3 attempts)
+## 🚀 Features
 
-Modular design (easily extendable)
+### 🖥️ Interactive Dashboard
+- **Controls**: Set strict page limits (1-200) via the sidebar.
+- **Live Feedback**: Real-time progress bar and streaming logs.
+- **Instant Export**: Download data in **Excel**, **CSV**, or **JSON** immediately.
+- **Data Metrics**: Quick view of total jobs and unique companies found.
 
-🔹 Anti-Bot Evasion
+### 🛡️ Smart Scraping Core
+- **Anti-Bot Evasion**: Uses `requests.Session()` with realistic headers and random delays (1.5-3.5s).
+- **Retry Logic**: Automatically retries failed requests up to 3 times.
+- **Resilience**: Skips broken entries without crashing the entire process.
+- **Logging**: Detailed logging to both the UI and `fresherworld_scraper.log`.
 
-Random delays: 1.5–3.5 seconds
+---
 
-Realistic request headers
+## 📥 Extracted Data
 
-Predictable blocking avoided
+| Field | Description |
+| :--- | :--- |
+| **Role** | Job Title (e.g., Python Developer) |
+| **Company** | Hiring Organization |
+| **Location** | City / Remote status |
+| **Experience** | Years required |
+| **Salary** | Compensation range |
+| **Link** | Direct application URL |
 
-Logs every request & failure
+---
 
-🔹 Multiple Export Formats
+## 🛠️ Installation & Usage
 
-Excel (.xlsx)
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/AryanPrajapati9456/freshersworld-scraper.git
+    cd freshersworld-scraper
+    ```
 
-CSV (.csv) — dynamic fieldnames
+2.  **Install Dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-JSON (.json)
+3.  **Run the Dashboard**
+    ```bash
+    streamlit run app.py
+    ```
+    *Open the URL shown in your terminal (usually `http://localhost:8501`).*
 
-Files named with current date
+---
 
-🔹 Highly Reliable
+## 📁 Project Structure
 
-Auto-skips broken job entries
+```text
+├── app.py                  # 🎨 Streamlit App (Entry Point)
+├── scraping.py             # 🧠 Core Scraping Logic
+├── fresherworld_scraper.log # 📝 Runtime logs
+├── requirements.txt        # 📦 Dependencies
+├── README.md               # 📄 Documentation
+```
 
-Logs everything in fresherworld_scraper.log
+---
 
-Safe in long runs
+## ⚠️ Ethical Note
+This tool is for **educational and portfolio purposes**. Please respect FreshersWorld's `robots.txt` and Terms of Service. Do not scrape aggressively.
 
-Works even with partial failures
+---
 
-# 📁 Project Structure
-freshersworld/
-│── scraping.py
-│── fresherworld_scraper.log
-│── output/
-│     ├── fresher_world_YYYY-MM-DD.xlsx
-│     ├── fresher_world_YYYY-MM-DD.csv
-│     └── fresher_world_YYYY-MM-DD.json
-└── README.md
+## 👨‍💻 Author
+**Aryan Prajapati**
+*Python Developer • Web Scraper • Automation Engineer*
 
-# 🛠 Installation
-
-1. Clone the repository
-git clone https://github.com/AryanPrajapati9456/freshersworld-scraper.git
-cd freshersworld-scraper
-
-2. Install dependencies
-
-pip install -r requirements.txt
-
-▶️ Running the Scraper
-
-Simply run:
-
-python scraper.py
-
-
-Output files will appear as:
-
-fresher_world_YYYY-MM-DD.xlsx
-
-fresher_world_YYYY-MM-DD.csv
-
-fresher_world_YYYY-MM-DD.json
-
-# 🧠 How the Scraper Works
-
-🔄 Pagination Logic
-
-FreshersWorld uses:
-
-offset = page_number * 20
-
-
-The scraper handles this automatically for all pages.
-
-# 🛡 Anti-Detection Techniques
-
-Random delay between requests
-
-Retry logic for network failures
-
-Session-based scraping
-
-Modern User-Agent headers
-
-These techniques avoid temporary blocks and give the scraper a human-like footprint.
-
-# 🧹 Data Fields Extracted
-
-Field	Description
-Role	Job title
-Company Name	Employer
-Location	City / location
-Experience	Required experience
-Salary	Salary details
-Description	Job summary
-Post Date	Date posted
-Link	Job apply URL
-📊 Example JSON Output
-{
-  "Role": "Python Developer",
-  "Company Name": "TechCorp",
-  "Location": "Bangalore",
-  "Experience": "0-1 years",
-  "Salary": "₹3,00,000 - ₹4,00,000",
-  "Description": "Immediate opening for Python Dev...",
-  "Post Date": "2 days ago",
-  "Link": "/job/python-developer-12345"
-}
-
-# 🔮 Future Enhancements
-
-Proxy rotation support
-
-Auto-detect total pages
-
-Command-line flags (--csv, --json, etc.)
-
-SQLite / MongoDB export
-
-Daily auto-scraping with cron
-
-API wrapper version
-
-# 📜 License
-
-MIT License – free for commercial use.
-
-# 👨‍💻 Author
-
-Aryan Prajapati
-Python Developer • Web Scraper • Automation Engineer
-
-If you like this project, ⭐ star the repository on GitHub!
+[![GitHub](https://img.shields.io/badge/GitHub-AryanPrajapati9456-181717?style=flat&logo=github)](https://github.com/AryanPrajapati9456)
