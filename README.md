@@ -12,11 +12,11 @@ Built with **Requests**, **BeautifulSoup**, and **Streamlit**, it mimics human b
 
 ## 🎥 Project Demo
 
-<!-- 
-    TODO: Upload your demo video or GIF here. 
-    Example: ![Demo](demo.gif) or [Watch Video](link_to_youtube)
--->
-![Project Demo Placeholder](https://via.placeholder.com/800x400?text=Project+Demo+Video+Coming+Soon)
+
+
+https://github.com/user-attachments/assets/740ec8a3-096a-497a-82df-85ce5ab694a7
+
+
 
 ---
 
